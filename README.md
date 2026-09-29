@@ -227,36 +227,7 @@ En este proyecto, el sistema debe:
 7. Detectar el estado de los botones.
 8. Utilizar estos datos como entradas para la consola.
 
-El flujo básico del sistema es:
 
-```text
-       INICIO
-          │
-          ▼
-   Inicializar PS/2
-          │
-          ▼
-   Inicializar Mouse
-          │
-          ▼
-    Recibir paquete
-          │
-          ▼
-   ¿Paquete válido?
-      │          │
-     NO         SÍ
-      │          │
-      │          ▼
-      │     Leer X e Y
-      │          │
-      │          ▼
-      │    Leer botones
-      │          │
-      │          ▼
-      │    Enviar datos
-      │          │
-      └──────────┘
-```
 
 ---
 
