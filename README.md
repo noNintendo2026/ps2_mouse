@@ -245,7 +245,7 @@ Si el mouse es compatible con IntelliMouse, responderá:
 
 El identificador `0x03` corresponde al modo IntelliMouse con rueda.
 
-### 📦 Paquete de datos
+###  Paquete de datos
 
 El paquete utilizado por el modo IntelliMouse contiene 4 bytes:
 
