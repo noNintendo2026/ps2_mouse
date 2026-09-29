@@ -213,7 +213,179 @@ Mouse                  Sistema
 El protocolo permite comunicación bidireccional, por lo que el sistema anfitrión también puede enviar comandos al mouse.
 
 ---
+## Microsoft IntelliMouse
 
+Para este proyecto se utilizará principalmente el modo **Microsoft IntelliMouse**, que permite incorporar una rueda de desplazamiento al protocolo PS/2 estándar.
+
+A diferencia del mouse PS/2 estándar, que utiliza paquetes de 3 bytes, el modo IntelliMouse utiliza paquetes de **4 bytes**.
+
+###  Activación del modo IntelliMouse
+
+Para activar el modo IntelliMouse se utiliza la siguiente secuencia:
+
+```text
+F3 C8
+F3 64
+F3 50
+F2
+```
+
+Donde:
+
+- `F3 C8` → Configura una tasa de muestreo de 200 informes/s.
+- `F3 64` → Configura una tasa de muestreo de 100 informes/s.
+- `F3 50` → Configura una tasa de muestreo de 80 informes/s.
+- `F2` → Solicita el identificador del mouse.
+
+Si el mouse es compatible con IntelliMouse, responderá:
+
+```text
+03
+```
+
+El identificador `0x03` corresponde al modo IntelliMouse con rueda.
+
+### 📦 Paquete de datos
+
+El paquete utilizado por el modo IntelliMouse contiene 4 bytes:
+
+```text
++--------+--------+--------+--------+
+| Byte 1 | Byte 2 | Byte 3 | Byte 4 |
++--------+--------+--------+--------+
+| Estado |   X    |   Y    | Rueda  |
++--------+--------+--------+--------+
+```
+
+### Byte 1 — Estado y botones
+
+```text
+Bit 7 → Y Overflow
+Bit 6 → X Overflow
+Bit 5 → Y Sign
+Bit 4 → X Sign
+Bit 3 → Siempre 1
+Bit 2 → Botón central
+Bit 1 → Botón derecho
+Bit 0 → Botón izquierdo
+```
+
+### Byte 2 — Movimiento X
+
+```text
+Byte 2 → Movimiento horizontal (X)
+```
+
+### Byte 3 — Movimiento Y
+
+```text
+Byte 3 → Movimiento vertical (Y)
+```
+
+### Byte 4 — Movimiento de la rueda
+
+```text
+Bit 7 → Extensión de signo
+Bit 6 → Extensión de signo
+Bit 5 → Extensión de signo
+Bit 4 → Extensión de signo
+Bit 3 → Z3
+Bit 2 → Z2
+Bit 1 → Z1
+Bit 0 → Z0
+```
+
+Los cuatro bits inferiores representan el movimiento de la rueda mediante un valor de **4 bits en complemento a dos**.
+
+El rango es:
+
+```text
+-8 a +7
+```
+
+
+```
+
+
+```
+
+El sistema utilizará:
+
+- Movimiento en X.
+- Movimiento en Y.
+- Botón izquierdo.
+- Botón derecho.
+- Botón central.
+- Movimiento de la rueda.
+
+---
+
+##  IntelliMouse de 5 botones
+
+Como posible ampliación del proyecto, también se tendrá en cuenta el modo **IntelliMouse de 5 botones**.
+
+Este modo mantiene todas las funciones anteriores y agrega dos botones adicionales:
+
+- Botón 4.
+- Botón 5.
+
+###  Activación
+
+La secuencia utilizada para solicitar este modo es:
+
+```text
+F3 C8
+F3 C8
+F3 50
+F2
+```
+
+Si el mouse es compatible con este modo, responderá:
+
+```text
+04
+```
+
+El identificador `0x04` corresponde al modo IntelliMouse de **5 botones con rueda**.
+
+###  Paquete de datos
+
+El paquete continúa teniendo 4 bytes:
+
+```text
++--------+--------+--------+----------------------+
+| Byte 1 | Byte 2 | Byte 3 |        Byte 4        |
++--------+--------+--------+----------------------+
+| Estado |   X    |   Y    | Rueda + Botones 4/5 |
++--------+--------+--------+----------------------+
+```
+
+El cuarto byte tiene la siguiente estructura:
+
+```text
+Bit 7 → 0
+Bit 6 → 0
+Bit 5 → Botón 5
+Bit 4 → Botón 4
+Bit 3 → Z3
+Bit 2 → Z2
+Bit 1 → Z1
+Bit 0 → Z0
+```
+
+Por lo tanto:
+
+```text
+Byte 4 = [0][0][B5][B4][Z3][Z2][Z1][Z0]
+```
+
+Donde:
+
+```text
+B4 → Botón adicional 4
+B5 → Botón adicional 5
+Z  → Movimiento de la rueda
+```
 ##  Aplicación en el proyecto
 
 En este proyecto, el sistema debe:
