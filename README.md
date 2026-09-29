@@ -68,7 +68,7 @@ El identificador `0x00` corresponde al mouse PS/2 estándar.
 
 ---
 
-## 📡 Paquete de datos
+##  Paquete de datos
 
 Un mouse PS/2 estándar transmite la información de movimiento mediante paquetes de **3 bytes**.
 
