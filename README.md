@@ -260,15 +260,7 @@ El flujo básico del sistema es:
 
 ---
 
-##  Tecnologías
 
-- Protocolo **PS/2**
-- Mouse PS/2
-- Comunicación serial síncrona
-- Sistema embebido / FPGA / microcontrolador
-- Lenguaje de descripción de hardware o lenguaje utilizado por el controlador
-
----
 
 ##  Referencias
 
