@@ -3,7 +3,7 @@ Repositorio grupo de ps2_mouse
 
 ## Conexiones fisicas del dispositivo
 
-El ps/2 del mouse consta de un conector de 5 o 6 pines (dependiendo del dispositivo), los cuales asignan 4 pines em ambos casos, y es posible usar un adaptador de uno a otro, o lograr usar algún pin para otro proposito.
+El ps/2 del mouse consta de un conector de 5 o 6 pines (dependiendo del dispositivo), los cuales asignan 4 pines en ambos casos, y es posible usar un adaptador de uno a otro, o lograr usar algún pin para otro proposito.
 
 <img src="imagenes/conexiones1.png" width="300" alt="Conexiones del dispositivo ps/2">
 
